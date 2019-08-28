@@ -1,7 +1,9 @@
 Running httpbin over HTTP/3
 ===========================
 
-This explains how to run `httpbin` over HTTP/3 using `aioquic`_ and `hypercorn`_.
+This document explains how to run `httpbin` over HTTP/3 using `aioquic`_ and `hypercorn`_.
+
+You will need Python 3.7 or better.
 
 Install requirements:
 
