@@ -3,6 +3,7 @@ Patched version of asgiref.wsgi to include these fixes:
 
 https://github.com/django/asgiref/pull/117
 https://github.com/django/asgiref/pull/118
+https://github.com/django/asgiref/pull/119
 """
 
 from io import BytesIO
@@ -38,7 +39,7 @@ class WsgiToAsgiInstance:
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
-            raise ValueError("WSGI wrapper received a non-HTTP scope")        
+            raise ValueError("WSGI wrapper received a non-HTTP scope")
         self.scope = scope
         # Alright, wait for the http.request message
         message = await receive()
@@ -55,7 +56,7 @@ class WsgiToAsgiInstance:
         """
         environ = {
             "REQUEST_METHOD": scope["method"],
-            "SCRIPT_NAME": "",
+            "SCRIPT_NAME": scope.get("root_path", ""),
             "PATH_INFO": scope["path"],
             "QUERY_STRING": scope["query_string"].decode("ascii"),
             "SERVER_PROTOCOL": "HTTP/%s" % scope["http_version"],
