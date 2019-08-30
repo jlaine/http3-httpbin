@@ -1,5 +1,4 @@
 import httpbin
-
-from wsgi import WsgiToAsgi
+from asgiref.wsgi import WsgiToAsgi
 
 app = WsgiToAsgi(httpbin.app)
